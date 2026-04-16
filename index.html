@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snake Game</title>
+  </head>
+  <body>
+    <canvas id="gameArea" width="480" height="320"></canvas>
+    <script>
+      const gameArea= document.getElementById("gameArea");
+      const ctx = gameArea.getContext("2d");
+      let x = 0 ;
+      let y = 0 ;
+      let radius = 8 ;
+      function drawBall{
+        ctx.beginPath();
+        ctx.arc(x,y,radius,0, Math.PI*2);
+        ctx.fillStyle = "#fff";
+        ctx.fill;
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>
