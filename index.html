@@ -5,20 +5,19 @@
 	<link href= "https://i.ibb.co/dJLMZ43C/Snake-Green-removebg-preview.png"rel="icon">
   </head>
   <body>
-    <canvas id="gameArea" width="480" height="320"></canvas>
+    <canvas id="gameArea" width="480" height="320" style="border:10px dotted black;"> Your Browser does not suporte this game.</canvas>
     <script>
 	  let rightPressed = false;
 	  let leftPressed = false;
 	  let upPressed = false;
 	  let downPressed = false;
 	  document.addEventListener("keydown",keyDownHandler);
-	  document.addEventListener("keyup",keyUpHandler);
       const gameArea= document.getElementById("gameArea");
       const ctx = gameArea.getContext("2d");
       let x = gameArea.width/2 ;
       let y = gameArea.height/2 ;
-	  let dx = 2;
-	  let dy = -2;
+	  let dx = 0;
+	  let dy = 0;
       let radius = 20;
       function drawBall(){
         ctx.beginPath();
@@ -28,6 +27,15 @@
         ctx.closePath();
       }
 	  function draw(){
+		if (x > 460 || x < 20 || y > 300 || y < 20){
+			alert("Game Over ! You touched the border !");
+			x = gameArea.width/2;
+			y = gameArea.height/2;
+			let rightPressed = false;
+		    let leftPressed = false;
+		    let upPressed = false;
+		    let downPressed = false;
+		}
 		ctx.clearRect(0,0,gameArea.width,gameArea.height);
 		drawBall();
 		x += dx;
@@ -38,35 +46,38 @@
 	  function keyDownHandler(e){
 		if (e.key === "Down" || e.key === "ArrowDown"){
 			downPressed= true;
+			upPressed = false;
+			leftPressed = false;
+			rightPressed = false;
+			dy = 1;
+			dx = 0;
 		}
 		
 		if (e.key === "Up" || e.key === "ArrowUp"){
 			upPressed= true;
+			downPressed = false;
+			rightPressed = false;
+			leftPressed = false;
+			dy = -1;
+			dx = 0;
 		}
 		
 		if (e.key === "Right" || e.key === "ArrowRight"){
 			RightPressed= true;
+			leftPressed = false;
+			upPressed = false;
+			downPressed = false;
+			dx = 1;
+			dy = 0;
 		}
 		
 		if (e.key === "Left" || e.key === "ArrowLeft"){
 			leftPressed= true;
-		}
-	  }
-	  function keyUpHandler(e){
-		if (e.key === "Down" || e.key === "ArrowDown"){
-			downPressed= false;
-		}
-		
-		if (e.key === "Up" || e.key === "ArrowUp"){
-			upPressed= false;
-		}
-		
-		if (e.key === "Right" || e.key === "ArrowRight"){
-			RightPressed= false;
-		}
-		
-		if (e.key === "Left" || e.key === "ArrowLeft"){
-			leftPressed= false;
+			rightPressed = false;
+			upPressed = false;
+			downPressed = false;
+			dx = -1;
+			dy = 0;
 		}
 	  }
 	  draw();
